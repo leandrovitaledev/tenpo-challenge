@@ -1,5 +1,7 @@
 package com.example.tenpochallenge.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tenpochallenge.DTO.CalculatorDTO;
+import com.example.tenpochallenge.entity.RegistroHistorial;
 import com.example.tenpochallenge.exception.CustomException;
 import com.example.tenpochallenge.service.CalculatorService;
 
@@ -72,6 +75,11 @@ public class CalculatorController {
 	@GetMapping("/calculator")
 	public double getResult(@RequestBody CalculatorDTO dto) throws Exception {
 		 return calculatorService.getResult(dto);
+	}
+	
+	@GetMapping("/registry")
+	public List<RegistroHistorial> getRegistry() throws Exception {
+		 return calculatorService.getRegistry();
 	}
 	
 	@ExceptionHandler(CustomException.class)

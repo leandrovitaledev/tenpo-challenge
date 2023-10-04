@@ -25,6 +25,9 @@ public class RegistroHistorial {
 		this.resultado = resultado;
 	}
 	
+	public RegistroHistorial() {
+	}
+	
 	public int getNum1() {
 		return num1;
 	}

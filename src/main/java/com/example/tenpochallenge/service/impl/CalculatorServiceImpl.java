@@ -1,5 +1,7 @@
 package com.example.tenpochallenge.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +57,10 @@ public class CalculatorServiceImpl implements CalculatorService {
 	private double calcularResultado(int num1, int num2, double randomNumber) {
 		int suma = num1 + num2;
 	    return suma + (suma * (randomNumber / 100.0));
+	}
+	
+	public List<RegistroHistorial> getRegistry() {
+		return registroHistorialDao.findAll();
 	}
 
 }
