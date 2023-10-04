@@ -10,8 +10,8 @@ public class RandomNumberDaoImpl implements RandomNumberDao {
 	
 	@Override
 	public String getRandomNumber() throws Exception {
-			WebClient webClient = WebClient.create("https://aaa");
-//			WebClient webClient = WebClient.create("https://www.random.org");
+//			WebClient webClient = WebClient.create("https://aaa");
+			WebClient webClient = WebClient.create("https://www.random.org");
 			String responseMono = webClient.get().uri("/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new").retrieve().bodyToMono(String.class).block();
 			return responseMono;
 	}
