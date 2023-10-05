@@ -1,5 +1,6 @@
 package com.example.tenpochallenge.dao.impl;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -9,6 +10,7 @@ import com.example.tenpochallenge.dao.RandomNumberDao;
 public class RandomNumberDaoImpl implements RandomNumberDao {
 	
 	@Override
+	@Cacheable("miCache")
 	public String getRandomNumber() throws Exception {
 //			WebClient webClient = WebClient.create("https://aaa");
 			WebClient webClient = WebClient.create("https://www.random.org");

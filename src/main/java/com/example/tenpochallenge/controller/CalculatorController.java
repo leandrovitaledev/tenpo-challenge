@@ -1,12 +1,12 @@
 package com.example.tenpochallenge.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tenpochallenge.DTO.CalculatorDTO;
@@ -78,8 +78,8 @@ public class CalculatorController {
 	}
 	
 	@GetMapping("/registry")
-	public List<RegistroHistorial> getRegistry() throws Exception {
-		 return calculatorService.getRegistry();
+	public Page<RegistroHistorial> getRegistry(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) throws Exception {
+		 return calculatorService.getRegistry(page, size);
 	}
 	
 	@ExceptionHandler(CustomException.class)

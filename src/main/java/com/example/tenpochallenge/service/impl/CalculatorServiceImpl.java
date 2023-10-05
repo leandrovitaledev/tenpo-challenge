@@ -3,6 +3,9 @@ package com.example.tenpochallenge.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.tenpochallenge.DTO.CalculatorDTO;
@@ -59,7 +62,12 @@ public class CalculatorServiceImpl implements CalculatorService {
 	    return suma + (suma * (randomNumber / 100.0));
 	}
 	
-	public List<RegistroHistorial> getRegistry() {
+	public Page<RegistroHistorial> getRegistry(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return registroHistorialDao.findAll(pageable);
+	}
+	
+	public List<RegistroHistorial> getRegistry2() {
 		return registroHistorialDao.findAll();
 	}
 
