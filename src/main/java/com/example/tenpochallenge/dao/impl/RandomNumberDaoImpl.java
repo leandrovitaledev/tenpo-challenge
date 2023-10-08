@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.tenpochallenge.dao.RandomNumberDao;
+import com.example.tenpochallenge.exception.CustomException;
+import com.example.tenpochallenge.utils.HTTPCodesEnum;
 
 @Repository
 public class RandomNumberDaoImpl implements RandomNumberDao {
@@ -12,10 +14,32 @@ public class RandomNumberDaoImpl implements RandomNumberDao {
 	@Override
 	@Cacheable("miCache")
 	public String getRandomNumber() throws Exception {
-//			WebClient webClient = WebClient.create("https://aaa");
-			WebClient webClient = WebClient.create("https://www.random.org");
-			String responseMono = webClient.get().uri("/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new").retrieve().bodyToMono(String.class).block();
-			return responseMono;
+		
+		String responseMono = null;
+		int maxRetries = 3;
+		int retryDelayMs = 1000;
+		int currentRetry = 0;
+
+		while (currentRetry < maxRetries) {
+			try {
+				WebClient webClient = WebClient.create("https://www.random.org");
+				responseMono = webClient.get()
+						.uri("/integers/?num=1&min=1&max=100&col=1&base=10&format=plain&rnd=new").retrieve()
+						.bodyToMono(String.class).block();
+				System.out.println("anduvo ok recuperar numero random");
+				break;
+			} catch (Exception e) {
+				currentRetry++;
+				Thread.sleep(retryDelayMs);
+			}
+		}
+
+		if (currentRetry >= maxRetries) {
+			System.out.println("fallo recuperar numero random en el dao");
+			throw new CustomException(HTTPCodesEnum.STATUS_400);
+		}
+		
+		return responseMono;
 	}
 	
 //	@Override

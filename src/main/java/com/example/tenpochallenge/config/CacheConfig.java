@@ -25,4 +25,14 @@ public class CacheConfig {
 	    caffeineCacheManager.setCaffeine(caffeine);
 	    return caffeineCacheManager;
 	}
+	
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(requestInterceptor());
+//    }
+//
+//    @Bean
+//    public RequestInterceptor requestInterceptor() {
+//        return new RequestInterceptor();
+//    }
 }
