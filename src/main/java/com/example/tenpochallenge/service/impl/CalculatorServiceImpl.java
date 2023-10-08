@@ -51,6 +51,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 		try {
 			registroHistorialDao.save(registroHistorial);
 		} catch (RuntimeException e) {
+			System.out.println("fallo guardar en BD");
 			throw new CustomException(HTTPCodesEnum.STATUS_400);
 		}
 		
