@@ -1,7 +1,5 @@
 package com.example.tenpochallenge.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -66,10 +64,6 @@ public class CalculatorServiceImpl implements CalculatorService {
 	public Page<RegistroHistorial> getRegistry(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		return registroHistorialDao.findAll(pageable);
-	}
-	
-	public List<RegistroHistorial> getRegistry2() {
-		return registroHistorialDao.findAll();
 	}
 
 }

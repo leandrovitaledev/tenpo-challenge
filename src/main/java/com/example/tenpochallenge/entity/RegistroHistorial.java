@@ -25,6 +25,13 @@ public class RegistroHistorial {
 		this.resultado = resultado;
 	}
 	
+	public RegistroHistorial(int num1, int num2, double randomNumber, double resultado) {
+		this.num1 = num1;
+		this.num2 = num2;
+		this.randomNumber = randomNumber;
+		this.resultado = resultado;
+	}
+	
 	public RegistroHistorial() {
 	}
 	
